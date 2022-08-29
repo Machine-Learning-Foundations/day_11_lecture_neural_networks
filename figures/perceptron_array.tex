@@ -1,0 +1,81 @@
+\documentclass[crop,tikz]{standalone}% 'crop' is the default for v1.0, before it was 'preview'
+%\usetikzlibrary{...}% tikz package already loaded by 'tikz' option
+\usetikzlibrary{shapes,snakes}
+\usepackage{amsmath}
+\begin{document}
+\begin{tikzpicture}
+
+\def\vertspace{1.5cm}
+\def\horispace{3.5cm}
+
+
+\tikzstyle{input}=[rectangle,fill=blue!25,minimum size=30pt,inner sep=0pt]
+\tikzstyle{neuron}=[rectangle,fill=green!25,minimum size=30pt,inner sep=0pt]
+\tikzstyle{activation}=[neuron, fill=orange!50];
+\tikzstyle{output}=[neuron, fill=yellow!50];
+
+%inputs
+\node (in) at (\horispace,-1*\vertspace) {input};
+\node[input] (x1) at (\horispace,0*\vertspace) {$x_1$};
+\node[input] (x2) at (\horispace,1*\vertspace) {$x_2$};
+\node[input] (x3) at (\horispace,2*\vertspace) {$x_3$};
+\node (dots) at (\horispace,3*\vertspace) {$\vdots$};
+\node[input] (xn) at (\horispace,4*\vertspace) {$x_n$};
+
+%weights
+\node (nerolabel) at (3.5*\horispace,-1*\vertspace) {weighting};
+\node[neuron] (n1) at (3.5*\horispace,0*\vertspace) {$\mathbf{w}_1^T \mathbf{x} + b_1 = \bar{h}_1$};
+\node[neuron] (n2) at (3.5*\horispace,1*\vertspace) {$\mathbf{w}_2^T \mathbf{x} + b_2 = \bar{h}_2$};
+\node[neuron] (n3) at (3.5*\horispace,2*\vertspace) {$\mathbf{w}_3^T \mathbf{x} + b_3 = \bar{h}_3$};
+\node (ndots) at (3.5*\horispace,3*\vertspace) {$\vdots$};
+\node[neuron] (nn) at (3.5*\horispace,4*\vertspace) {$\mathbf{w}_n^T \mathbf{x} + b_n = \bar{h}_n$};
+
+%connections
+\draw[->] (x1) -- (n1);
+\draw[->] (x2) -- (n1);
+\draw[->] (x3) -- (n1);
+\draw[->] (xn) -- (n1);
+
+\draw[->] (x1) -- (n2);
+\draw[->] (x2) -- (n2);
+\draw[->] (x3) -- (n2);
+\draw[->] (xn) -- (n2);
+
+\draw[->] (x1) -- (n3);
+\draw[->] (x2) -- (n3);
+\draw[->] (x3) -- (n3);
+\draw[->] (xn) -- (n3);
+
+\draw[->] (x1) -- (nn);
+\draw[->] (x2) -- (nn);
+\draw[->] (x3) -- (nn);
+\draw[->] (xn) -- (nn);
+
+
+
+% activation
+\node (actlabel) at (5*\horispace,-1*\vertspace) {activation};
+\node[activation] (act1) at (5*\horispace, 0*\vertspace) {$f(\bar{h}_1)$};
+\node[activation] (act2) at (5*\horispace, 1*\vertspace) {$f(\bar{h}_2)$};
+\node[activation] (act3) at (5*\horispace, 2*\vertspace) {$f(\bar{h}_3)$};
+\node (adots) at (5*\horispace,3*\vertspace) {$\vdots$};
+\node[activation] (actn) at (5*\horispace, 4*\vertspace) {$f(\bar{h}_n)$};
+
+
+%connections
+\draw[->] (n1) -- (act1);
+\draw[->] (n2) -- (act2);
+\draw[->] (n3) -- (act3);
+\draw[->] (nn) -- (actn);
+
+% output
+\node (actlabel) at (6*\horispace,-1*\vertspace) {output};
+\node[output] (out) at (6*\horispace, 2*\vertspace) {$\mathbf{h}$};
+\draw[->] (act1) -| (out);
+\draw[->] (act2) -| (out);
+\draw[->] (act3) -- (out);
+\draw[->] (actn) -| (out);
+
+
+\end{tikzpicture}
+\end{document}
