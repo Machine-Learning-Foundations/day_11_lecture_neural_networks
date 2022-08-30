@@ -74,15 +74,15 @@
     \end{frame}
 
     \begin{frame}{The perceptron}
-      How can we teach computers to recognize digits? \\
-      Use perceptrons to mimic biological neurons loosely.
+      Can computers recognize digits? Mimic biological neurons,
       \begin{figure}
         \includestandalone[scale=.575]{./figures/perceptron}
       \end{figure}
-      Formally a single perceptron is defined as:
+      Formally a single perceptron is defined as
       \begin{align}
         f(\mathbf{w}^T \mathbf{x}) = h
       \end{align}
+      with $\mathbf{w} \in \mathbb{R}^n$, $\mathbf{x} \in \mathbb{R}^n$ and $h \in \mathbb{R}$. 
     \end{frame}
 
     \begin{frame}{The activation function $f$}
@@ -98,11 +98,11 @@
       \begin{figure}
         \includestandalone[scale=0.5]{./figures/perceptron_array}
       \end{figure}
-      Every input is connected to every neuron, in matrix language, this turns into
+      Every input is connected to every neuron. In matrix language, this turns into
       \begin{align}
-        \bar{\mathbf{h}} = \mathbf{W}\mathbf{x} + \mathbf{b} \\
-        \mathbf{h} = f(\bar{\mathbf{h}}).
+        \bar{\mathbf{h}} &= \mathbf{W}\mathbf{x} + \mathbf{b}, & \mathbf{h} = f(\bar{\mathbf{h}}).
       \end{align}
+      With $\mathbf{W} \in \mathbb{R}^{m,n}$, $\mathbf{x} \in \mathbb{R}^{n}$, $\mathbf{b} \in \mathbb{R}^{m}$, and $\mathbf{h}, \bar{\mathbf{h}} \in \mathbb{R}^m$.
     \end{frame}
 
     \begin{frame}{The loss function}
@@ -112,30 +112,59 @@
         C_{\text{mse}} = \frac{1}{2} \sum_{k=1}^{n} (\mathbf{y}_k - \mathbf{h}_k)^2 = \frac{1}{2} (\mathbf{y} - \mathbf{h})^T(\mathbf{y} - \mathbf{h})
       \end{align}
       This function measures the squared distance from each desired output.
-      $\mathbf{y}$ denotes the desired labels, and $\mathbf{h}$ the network output.
+      $\mathbf{y}$ denotes the desired labels, and $\mathbf{h}$ represents network output.
     \end{frame}
 
 
     \begin{frame}{The gradient of the mse-cost-function}
       Both the mean squared error loss function and our dense layer are differentiable. 
       \begin{align}
-        \frac{\partial C_{\text{mse}}}{\partial \mathbf{o}} = \mathbf{o} - \mathbf{y} = \triangle_{\text{mse}}
+        \frac{\partial C_{\text{mse}}}{\partial \mathbf{h}} = \mathbf{h} - \mathbf{y} = \triangle_{\text{mse}}
       \end{align}
       The $\triangle$ symbol will re-appear. It always indicates incoming gradient information from above.
+      If the labels are a vector of shape $\mathbb{R}^m$, $\triangle$ and the network output $\mathbf{h}$ must share 
+      this dimension.
     \end{frame}
 
     \begin{frame}{The gradient of a dense layer}
-      The chain rule tells us the gradients for the dense layer\cite{nielsen2015neural}
+      The chain rule tells us the gradients for the dense layer~\cite{nielsen2015neural}
       \begin{align}
-        \delta \mathbf{W} = [f'(\bar{\mathbf{h}})]\mathbf{x}^T, \dots
+        \delta \mathbf{W} &= [f'(\bar{\mathbf{h}}) \odot \triangle]\mathbf{x}^T, &  \delta \mathbf{b} = f'(\bar{\mathbf{h}}) \odot \triangle, \\
+        \delta \mathbf{x} &= \mathbf{W}^T [f'(\bar{\mathbf{h}}) \odot \triangle],
       \end{align}
-      Good news! Jax can take care of these computations for you!
+      where $\odot$ is the element-wise product. $\delta$ denotes the cost function gradient for the value following it \cite{greff2016lstm}. \\
+      Good news! Jax can take care of these computations for you! \\
+      You can choose to verify these equations by completing the optional deep learning project.
       \note{
-        You can choose to optimally verify these equations by completing the deep learning project.}
+        On the board, derive:
+        Recall the chain rule $(g(h(x)))' = g'(h(x)) \cdot h'(x)$.
+        For the activation function, we have,
+        \begin{align}
+          \bar{\mathbf{h}} &= f(\bar{\mathbf{h}}) \\
+          \Rightarrow \delta \bar{\mathbf{h}} &= f'(\bar{\mathbf{h}}) \odot \triangle
+        \end{align}
+        For the weight matrix,
+        \begin{align}
+          \bar{\mathbf{h}} &= \mathbf{W}\mathbf{x} + \mathbf{b} \\
+          \Rightarrow \delta \mathbf{W} &= \delta \bar{\mathbf{h}} \mathbf{x}^T = [f'(\bar{\mathbf{h}}) \odot \triangle]^T \mathbf{x}
+        \end{align}
+        For the bias,
+        \begin{align}
+          \bar{\mathbf{h}}  &= \mathbf{W}\mathbf{x} + \mathbf{b} \\
+          \Rightarrow \delta \mathbf{b} &= 1 \odot \delta \bar{\mathbf{h}} = [f'(\bar{\mathbf{h}}) \odot \triangle]
+        \end{align}
+      }
     \end{frame}
 
     \begin{frame}{Derivatives of our activation functions}
-      TODO
+      \begin{align}
+        \sigma'(x) = \sigma \cdot (1 - \sigma(x)) \\
+        \text{ReLU}' = H(x) 
+      \end{align}
+      \begin{figure}
+        \includestandalone[width=0.49\linewidth]{./figures/sigmoid_prime}
+        \includestandalone[width=0.447\linewidth]{./figures/relu_prime}
+      \end{figure}
     \end{frame}
 
     \begin{frame}{Perceptrons can learn functions}
