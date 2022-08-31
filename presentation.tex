@@ -133,8 +133,8 @@
         \delta \mathbf{x} &= \mathbf{W}^T [f'(\bar{\mathbf{h}}) \odot \triangle],
       \end{align}
       where $\odot$ is the element-wise product. $\delta$ denotes the cost function gradient for the value following it \cite{greff2016lstm}. \\
-      Good news! Jax can take care of these computations for you! \\
-      You can choose to verify these equations by completing the optional deep learning project.
+      \textbf{Modern libraries will take care of these computations for you!} \\
+      You can choose to verify these equations yourself by completing the optional deep learning project.
       \note{
         On the board, derive:
         Recall the chain rule $(g(h(x)))' = g'(h(x)) \cdot h'(x)$.
@@ -167,32 +167,78 @@
       \end{figure}
     \end{frame}
 
-    \begin{frame}{Perceptrons can learn functions}
-      TODO
+    \begin{frame}{Perceptrons for functions}
+      The network components described this far already allow function learning.
+      Given a noisy input signal $x \in \mathbb{R}^{m}$ and a ground through output $y \in \mathbb{R}^m$,
+      define,
+      \begin{align}
+        \mathbf{h} = \sigma(\mathbf{W}\mathbf{x} + \mathbf{b}) \\
+        \mathbf{y}_{\text{net}} = \mathbf{W}_y\mathbf{h}
+      \end{align}
+      With $\mathbf{W} \in \mathbb{R}^{m,n}$, $\mathbf{x} \in \mathbb{R}^{n}$ and $\mathbf{b} \in \mathbb{R}^{m}$.
+      $m$ and $n$ denote the number of neurons and the input signal length.
+      For signal denoising, input and output have the same length. Therefore $\mathbf{W}_y \in \mathbb{R}^{n,m}$.
     \end{frame}
 
-    \begin{frame}{Multi-layer networks}
-      TODO
+    \begin{frame}{Denoising a cosine}
+      Training works by iteratively descending along the gradients. For $\mathbf{W}$ the weights at the
+      next time step $\tau$ are given by,
+      \begin{align}
+        \mathbf{W}_{\tau + 1} = \mathbf{W}_\tau + \epsilon \cdot \delta\mathbf{W}_{\tau}.
+      \end{align}
+      The step size is given by $\epsilon$. At $\tau = 0$ matrix entries are random.
+      $\mathcal{U}[-0.1, 0.1]$ is a reasonable choice here.
+      The process is the same for all other network components.
+    \end{frame}
+
+
+    \begin{frame}{Denoising a cosine}
+      Optimization for 500 steps leads to the output below:
+      \begin{figure}
+        \includestandalone[width=.5\linewidth]{./figures/denoising}
+        \caption{The cosine function is shown in blue. A noisy network input in orange, and a denoised network output in green.}
+        \end{figure}
+    \end{frame}
+
+
+    \section{Classification with neural networks}
+
+    \begin{frame}{Deep multi-layer networks}
+      Stack dense layers and activations to create deep networks. \\
+      \begin{figure}
+        \includestandalone[width=\linewidth]{./figures/multilayer} 
+      \end{figure}
     \end{frame}
 
     \begin{frame}{Backpropagation}
-      TODO
+      \begin{figure}
+        \includestandalone[width=\linewidth]{./figures/backprop} 
+      \end{figure}
     \end{frame}
-
-    \section{Estimation, Overfitting and Regularization}
-    \begin{frame}{Denoising a signal}
-      TODO
-    \end{frame}
-
-    \section{Classification}
 
     \begin{frame}{The cross-entropy loss}
+      The cross entropy loss function is defined as \cite{nielsen2015neural, bishop2006pattern}
+      \begin{align}
+       C_{\text{ce}}(\mathbf{t}, \mathbf{o}) = -\sum_k^{n_o} ( \mathbf{t}_k  \ln \mathbf{o}_k) 
+                                  + (\mathbf{1} - \mathbf{t}_k)
+                                     \ln(\mathbf{1} - \mathbf{o}_k).
+      \end{align}
+      If a sigmoidal activation function produced $\mathbf{o}$ the gradients can be computed using ~\cite{nielsen2015neural,bishop2006pattern}
+      \begin{align}
+         \frac{\partial C_{ce}}{\partial \mathbf{h}} 
+         = \sigma(\mathbf{h}) - \mathbf{y} = \triangle_{\text{ce}}
+      \end{align}
+      \note{
+        TODO: find the proof.
+      }
+    \end{frame}
+
+    \begin{frame}{Validation and Test data splits}
       TODO
     \end{frame}
 
-    \begin{frame}{MNIST digit }
-      Modified National Institute of Standards and Technology database
-        \cite{dumoulin2016guide}
+    \begin{frame}{MNIST-Classification}
+      TODO
     \end{frame}
 
     \begin{frame}{Literature}
