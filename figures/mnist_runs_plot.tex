@@ -1,0 +1,130 @@
+\documentclass{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\DeclareUnicodeCharacter{2212}{−}
+\usepgfplotslibrary{groupplots,dateplot}
+\usetikzlibrary{patterns,shapes.arrows}
+\pgfplotsset{compat=newest}
+\begin{document}
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{forestgreen4416044}{RGB}{44,160,44}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{axis}[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.03,0.97)},
+  anchor=north west,
+  draw=lightgray204
+},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xmin=0.55, xmax=10.45,
+xtick style={color=black},
+y grid style={darkgray176},
+ymin=0.829441245703492, ymax=0.942434924363624,
+ytick style={color=black},
+ylabel={Accuracy},
+xlabel={Epochs}
+]
+\path [draw=steelblue31119180, fill=steelblue31119180, opacity=0.2]
+(axis cs:1,0.854504764080048)
+--(axis cs:1,0.842349469661713)
+--(axis cs:2,0.882512986660004)
+--(axis cs:3,0.897350072860718)
+--(axis cs:4,0.906358420848846)
+--(axis cs:5,0.912722110748291)
+--(axis cs:6,0.918476521968842)
+--(axis cs:7,0.923117518424988)
+--(axis cs:8,0.926965117454529)
+--(axis cs:9,0.93036961555481)
+--(axis cs:10,0.933633327484131)
+--(axis cs:10,0.934671759605408)
+--(axis cs:10,0.934671759605408)
+--(axis cs:9,0.93135929107666)
+--(axis cs:8,0.928126335144043)
+--(axis cs:7,0.924177289009094)
+--(axis cs:6,0.919753968715668)
+--(axis cs:5,0.914687991142273)
+--(axis cs:4,0.907465279102325)
+--(axis cs:3,0.899816036224365)
+--(axis cs:2,0.886592209339142)
+--(axis cs:1,0.854504764080048)
+--cycle;
+
+\path [draw=darkorange25512714, fill=darkorange25512714, opacity=0.2]
+(axis cs:1,0.852222681045532)
+--(axis cs:1,0.834577322006226)
+--(axis cs:2,0.877393364906311)
+--(axis cs:3,0.88949066400528)
+--(axis cs:4,0.900975286960602)
+--(axis cs:5,0.906902432441711)
+--(axis cs:6,0.910800099372864)
+--(axis cs:7,0.914775252342224)
+--(axis cs:8,0.91931813955307)
+--(axis cs:9,0.92265647649765)
+--(axis cs:10,0.924487113952637)
+--(axis cs:10,0.929912924766541)
+--(axis cs:10,0.929912924766541)
+--(axis cs:9,0.92614358663559)
+--(axis cs:8,0.924282014369965)
+--(axis cs:7,0.918024897575378)
+--(axis cs:6,0.916400074958801)
+--(axis cs:5,0.911097645759583)
+--(axis cs:4,0.904224932193756)
+--(axis cs:3,0.896909534931183)
+--(axis cs:2,0.883406639099121)
+--(axis cs:1,0.852222681045532)
+--cycle;
+
+\addplot [semithick, steelblue31119180, mark=*, mark size=1.5, mark options={solid}]
+table {%
+1 0.84842711687088
+2 0.884552597999573
+3 0.898583054542542
+4 0.906911849975586
+5 0.913705050945282
+6 0.919115245342255
+7 0.923647403717041
+8 0.927545726299286
+9 0.930864453315735
+10 0.934152543544769
+};
+\addlegendentry{train acc}
+\addplot [semithick, darkorange25512714, mark=*, mark size=1.5, mark options={solid}]
+table {%
+1 0.843400001525879
+2 0.880400002002716
+3 0.893200099468231
+4 0.902600109577179
+5 0.909000039100647
+6 0.913600087165833
+7 0.916400074958801
+8 0.921800076961517
+9 0.92440003156662
+10 0.927200019359589
+};
+\addlegendentry{val acc}
+\path [draw=forestgreen4416044, semithick]
+(axis cs:10,0.934941218467429)
+--(axis cs:10,0.937298848060891);
+
+\addplot [semithick, forestgreen4416044, mark=x, mark size=1.5, mark options={solid}]
+table {%
+10 0.93612003326416
+};
+\addlegendentry{test acc}
+\end{axis}
+
+\end{tikzpicture}
+
+\end{document}

@@ -233,12 +233,37 @@
       }
     \end{frame}
 
+    \begin{frame}{The MNIST-Dataset}
+      \begin{figure}
+        \includestandalone[width=0.9\linewidth,height=1.5cm]{./figures/mnist_sequence}
+        \caption{The MNIST-dataset contains 70k images of handwritten digits.}
+      \end{figure}
+    \end{frame}
+
     \begin{frame}{Validation and Test data splits}
-      TODO
+      \begin{itemize}
+        \item To ensure the correct operation of the systems we devise, it is paramount to 
+        hold back part of the data for validation and testing.
+        \item Before starting to train, split off validation and test data.
+        \item The 70k MNIST samples could, for example, be partitioned into 59k training images.
+        1k validation images and 10k test images. 
+      \end{itemize}
     \end{frame}
 
     \begin{frame}{MNIST-Classification}
-      TODO
+      Training a three-layer dense network on mnist for five runs leads to:
+      \begin{figure}
+        \includestandalone[width=0.7\linewidth]{./figures/mnist_runs_plot}
+      \end{figure}
+    \end{frame}
+
+    \begin{frame}{Conclusion}
+      \begin{itemize}
+        \item Artificial neural networks enable computers to make sense of images.
+        \item The optimization result depends on the initialization.
+        \item The initialization depends on the pseudo-randomness-seed.
+        \item Seed-values must be recorded.
+      \end{itemize}
     \end{frame}
 
     \begin{frame}{Literature}
