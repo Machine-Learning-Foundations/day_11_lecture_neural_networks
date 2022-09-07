@@ -219,14 +219,14 @@
     \begin{frame}{The cross-entropy loss}
       The cross entropy loss function is defined as \cite{nielsen2015neural, bishop2006pattern}
       \begin{align}
-       C_{\text{ce}}(\mathbf{t}, \mathbf{o}) = -\sum_k^{n_o} ( \mathbf{t}_k  \ln \mathbf{o}_k) 
-                                  + (\mathbf{1} - \mathbf{t}_k)
+       C_{\text{ce}}(\mathbf{y}, \mathbf{o}) = -\sum_k^{n_o} ( \mathbf{y}_k  \ln \mathbf{o}_k) 
+                                  + (\mathbf{1} - \mathbf{y}_k)
                                      \ln(\mathbf{1} - \mathbf{o}_k).
       \end{align}
       If a sigmoidal activation function produced $\mathbf{o}$ the gradients can be computed using ~\cite{nielsen2015neural,bishop2006pattern}
       \begin{align}
          \frac{\partial C_{ce}}{\partial \mathbf{h}} 
-         = \sigma(\mathbf{h}) - \mathbf{y} = \triangle_{\text{ce}}
+         = \sigma(\mathbf{o}) - \mathbf{y} = \triangle_{\text{ce}}
       \end{align}
       \note{
         TODO: find the proof.
@@ -266,7 +266,7 @@
       \end{itemize}
     \end{frame}
 
-    \begin{frame}{Literature}
+    \begin{frame}[allowframebreaks]{Literature}
       \printbibliography
     \end{frame}
 
