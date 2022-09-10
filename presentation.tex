@@ -250,6 +250,37 @@
       \end{itemize}
     \end{frame}
 
+    \begin{frame}{Input-preprocessing}
+      Standard initializations and learning algorithms assume an approximately standard normal distribution
+      of the network inputs. Consequently we must rescale the data using,
+      \begin{align}
+        \mathbf{x}_s = \frac{\mathbf{x} - \mu}{\sigma}
+      \end{align}
+      With $\mu$ and $\sigma$ the training set mean and standard deviation.
+    \end{frame}
+
+    \begin{frame}{Label-encoding}
+      It has proven useful to have individual output neurons produce probabilities for each class.
+      Given integer labels $1,2,3,4, \dots \in \mathbb{Z}$. One-hot encoded label vectors have a one 
+      at the labels positions and zeros elsewhere. I.e.
+      \begin{align}
+        \begin{pmatrix}
+          1 \\ 0 \\ 0 \\ 0 \\ \vdots
+        \end{pmatrix},
+        \begin{pmatrix}
+          0 \\ 1 \\ 0 \\ 0 \\\vdots
+        \end{pmatrix},
+        \begin{pmatrix}
+          0 \\ 0 \\ 1 \\ 0 \\\vdots
+        \end{pmatrix},
+        \begin{pmatrix}
+          0 \\ 0 \\ 0 \\ 1 \\\vdots
+        \end{pmatrix},
+        \dots
+      \end{align}
+      for the integer label sequence above.
+    \end{frame}
+
     \begin{frame}{MNIST-Classification}
       Training a three-layer dense network on mnist for five runs leads to:
       \begin{figure}
