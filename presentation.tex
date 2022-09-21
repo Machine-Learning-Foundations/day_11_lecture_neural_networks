@@ -24,6 +24,8 @@
 \usepackage{multimedia}
 \usepackage{standalone}
 \usepackage{csquotes}
+%\usepackage{hyperlink}
+%\usepackage{url}
 
 
 \PassOptionsToPackage{american}{babel} % change this to your language(s), main language last
@@ -72,6 +74,31 @@
         \caption{Most humans effortlessly recognize the digits \texttt{5 0 4 1 9 2 1 3}.}
       \end{figure}
     \end{frame}
+
+    \begin{frame}{Biological motivation}
+      \centering
+      \begin{figure}
+        \includegraphics[scale=0.3]{./figures/Chemical_synapse_schema_cropped}  
+      \end{figure}
+      Image source: en.wikipedia.org
+      %Image source: \url{https://en.wikipedia.org/wiki/Neuron#/media/File:Chemical_synapse_schema_cropped.jpg} 
+    \note{
+      \begin{itemize}
+        \item A Human brain contains approximately 86 billion neurons.
+        \item $10^{14}$ to $10^{15}$ synapses connect these neurons.
+        \item Neurons recieve inputs from dentrites.
+        \item and can produce outputs signals along its axon.
+        \item Axons are connect neurons, modelled by weighting inputs $wx$.
+        \item Neuron inputs can be inhibitive (negative weight) or
+        \item excitory (positive weight).
+        \item If enough inputs exite a neuron it fires.
+        \item The activation function aims to mimic this behaviour.
+        \item Even though neural networks started out as biologically motivated,
+        \item engineering efforts have since diverged from biology.
+      \end{itemize}
+    }
+    \end{frame}
+
 
     \begin{frame}{The perceptron}
       Can computers recognize digits? Mimic biological neurons,
