@@ -283,7 +283,8 @@
       \begin{align}
         \mathbf{X}_n = \frac{\mathbf{X} - \mu}{\sigma}
       \end{align}
-      With $\mu$ and $\sigma$ the training set mean and standard deviation. And the data matrix $\mathbf{X}$ with a row for each data point.
+      With $\mu$ and $\sigma$ the training set mean and standard deviation. And the data matrix $\mathbf{X} \in \mathbb{R}^{b,n}$ with a row for each data point.
+      $b$ denotes the number of data points and $n$ the data dimension.
     \end{frame}
 
     \begin{frame}{The effect of normalization}
@@ -344,7 +345,7 @@
 
     \begin{frame}{Conclusion}
       \begin{itemize}
-        \item Preprocessing followed by forward-passes backward-passes and testing form the classic training pipeling.
+        \item Preprocessing followed by forward-passes, backward-passes, and testing form the classic training pipeling.
         \item Using the pipeline, artificial neural networks enable computers to make sense of images.
         \item The optimization result depends on the initialization.
         \item The initialization depends on the pseudo-randomness-seed.
