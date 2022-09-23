@@ -281,10 +281,37 @@
       Standard initializations and learning algorithms assume an approximately standard normal distribution
       of the network inputs. Consequently we must rescale the data using,
       \begin{align}
-        \mathbf{x}_s = \frac{\mathbf{x} - \mu}{\sigma}
+        \mathbf{X}_n = \frac{\mathbf{X} - \mu}{\sigma}
       \end{align}
-      With $\mu$ and $\sigma$ the training set mean and standard deviation.
+      With $\mu$ and $\sigma$ the training set mean and standard deviation. And the data matrix $\mathbf{X}$ with a row for each data point.
     \end{frame}
+
+    \begin{frame}{The effect of normalization}
+      \begin{figure}
+      \includegraphics[width=\linewidth]{./figures/normalized.pdf}
+      \end{figure}
+    \end{frame}
+
+    \begin{frame}{Whitening the inputs}
+      Instead of deviding by the standard deviation, rescale the centered data with the singular values of the covariance matrix.
+      \begin{align}
+        \mathbf{C} = \frac{1}{n} (\mathbf{X} - \mu)^T(\mathbf{X} - \mu)
+      \end{align}
+      With $n$ as the total number of data points.
+      Whitening now uses the singular values of $\mathbf{C}$ to rescale the data,
+      \begin{align}
+        \mathbf{X}_w = \frac{(\mathbf{X} - \mu)}{\sqrt{\sigma} + \epsilon}
+      \end{align}
+      With $\epsilon$ i.e. equal to $1e^{-8}$ for numerical stability.
+    \end{frame}
+
+    \begin{frame}{The effect of Whitening}
+    \begin{figure}
+    \includegraphics[width=\linewidth]{./figures/whitened.pdf}
+      \end{figure}
+      Whitening is expensive and sometimes unstable. Consequently, most projects rely on normalization.
+    \end{frame}
+
 
     \begin{frame}{Label-encoding}
       It has proven useful to have individual output neurons produce probabilities for each class.
@@ -317,7 +344,8 @@
 
     \begin{frame}{Conclusion}
       \begin{itemize}
-        \item Artificial neural networks enable computers to make sense of images.
+        \item Preprocessing followed by forward-passes backward-passes and testing form the classic training pipeling.
+        \item Using the pipeline, artificial neural networks enable computers to make sense of images.
         \item The optimization result depends on the initialization.
         \item The initialization depends on the pseudo-randomness-seed.
         \item Seed-values must be recorded.
