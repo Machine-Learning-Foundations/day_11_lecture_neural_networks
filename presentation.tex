@@ -86,13 +86,13 @@
       \begin{itemize}
         \item A Human brain contains approximately 86 billion neurons.
         \item $10^{14}$ to $10^{15}$ synapses connect these neurons.
-        \item Neurons recieve inputs from dentrites.
-        \item and can produce outputs signals along its axon.
-        \item Axons are connect neurons, modelled by weighting inputs $wx$.
+        \item Neurons receive inputs from dendrites.
+        \item and can produce output signals along its axon.
+        \item Axons connect neurons, modeled by weighting inputs $wx$.
         \item Neuron inputs can be inhibitive (negative weight) or
-        \item excitory (positive weight).
-        \item If enough inputs exite a neuron it fires.
-        \item The activation function aims to mimic this behaviour.
+        \item excitatory (positive weight).
+        \item If enough inputs excite a neuron, it fires.
+        \item The activation function aims to mimic this behavior.
         \item Even though neural networks started out as biologically motivated,
         \item engineering efforts have since diverged from biology.
       \end{itemize}
@@ -211,7 +211,7 @@
       Training works by iteratively descending along the gradients. For $\mathbf{W}$ the weights at the
       next time step $\tau$ are given by,
       \begin{align}
-        \mathbf{W}_{\tau + 1} = \mathbf{W}_\tau + \epsilon \cdot \delta\mathbf{W}_{\tau}.
+        \mathbf{W}_{\tau + 1} = \mathbf{W}_\tau - \epsilon \cdot \delta\mathbf{W}_{\tau}.
       \end{align}
       The step size is given by $\epsilon$. At $\tau = 0$ matrix entries are random.
       $\mathcal{U}[-0.1, 0.1]$ is a reasonable choice here.
@@ -231,7 +231,7 @@
       \begin{itemize}
         \item Artificial neural networks are biologically motivated.
         \item Gradients make it possible to optimize arrays of neurons.
-        \item A single array of layer of neurons can solve tasks like denoising a sine.
+        \item A single array of layers of neurons can solve tasks like denoising a sine.
       \end{itemize}
     \end{frame}
 
@@ -260,7 +260,7 @@
       \end{align}
     \end{frame}
 
-    \begin{frame}{Understanding how cross entropy works}
+    \begin{frame}{Understanding how cross-entropy works}
       To understand cross entropy lets consider the boundary cases $y=0$ and $y=1$.
       \begin{figure}
         \includestandalone[width=0.49\linewidth]{./figures/ce_label_0}
@@ -298,12 +298,12 @@
 
     \begin{frame}{Input-preprocessing}
       Standard initializations and learning algorithms assume an approximately standard normal distribution
-      of the network inputs. Consequently we must rescale the data using,
+      of the network inputs. Consequently, we must rescale the data using,
       \begin{align}
         \mathbf{X}_n = \frac{\mathbf{X} - \mu}{\sigma}
       \end{align}
       With $\mu$ and $\sigma$ the training set mean and standard deviation. And the data matrix $\mathbf{X} \in \mathbb{R}^{b,n}$ with a row for each data point.
-      $b$ denotes the number of data points and $n$ the data dimension.
+      $b$ denotes the number of data points, and $n$ the data dimension.
     \end{frame}
 
     \begin{frame}{The effect of normalization}
